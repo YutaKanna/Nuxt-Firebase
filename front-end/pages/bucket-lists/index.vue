@@ -8,7 +8,7 @@
                 <div class="card">
                     <div class="card-content">
                         <p class="title">
-                        “There are two hard things in computer science: cache invalidation, naming things, and off-by-one errors.”
+                        “{{data}}”
                         </p>
                         <p class="subtitle">
                         Jeff Atwood
@@ -59,5 +59,11 @@
 <script>
 export default {
   layout: 'app',
+  async asyncData(app) {
+    const data = await app.$axios.$get('http://localhost:8000/api')
+    return {
+      data
+    }
+  }
 }
 </script>
