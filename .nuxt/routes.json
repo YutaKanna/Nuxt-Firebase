@@ -1,0 +1,8 @@
+[
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/var/www/app/nuxt/pages/index.vue",
+    "chunkName": "pages/index"
+  }
+]
