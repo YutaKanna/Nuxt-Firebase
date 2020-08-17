@@ -20,3 +20,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/', function() {
     return 'helloworld';
 });
+
+Route::get('bucket-lists', 'BucketListController@index');
