@@ -16,4 +16,13 @@ class BucketListController extends Controller
             'bucketLists' => BucketList::all()
         ]]);
     }
+
+    public function show($id)
+    {
+        $bucketList = BucketList::find($id);
+
+        return response()->json(['data' => [
+            'bucketList' => $bucketList
+        ]]);
+    }
 }

@@ -10,9 +10,17 @@ class BucketListController extends Controller
 {
     public function index()
     {
-        $hoge = BucketList::all();
         return response()->json(['data' => [
             'bucketLists' => BucketList::all()
+        ]]);
+    }
+
+    public function show($id)
+    {
+        $bucketList = BucketList::find($id);
+
+        return response()->json(['data' => [
+            'bucketList' => $bucketList
         ]]);
     }
 }

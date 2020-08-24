@@ -16,4 +16,5 @@ Route::get('/', function () {
 });
 
 
-// Route::get('bucket-lists', 'BucketListController@index');
+Route::get('bucket-lists', 'BucketListController@index');
+Route::get('bucket-lists/{id}', 'BucketListController@show');
