@@ -52,6 +52,22 @@ export default {
   modules: [
     // Doc: https://buefy.github.io/#/documentation
     'nuxt-buefy',
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
+  ],
+  axios: {
+    proxy: true
+  },
+  proxy: {
+    '/api/': {
+      target: 'http://localhost:8000',
+      pathRewrite: {
+        '^/api': '/'
+      }
+    }
+  },
+  plugins: [
+    { src: 'plugins/axios.js', ssr: false }
   ],
   /*
   ** Build configuration

@@ -9,8 +9,17 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/proxy": "^2.0.1",
     "nuxt": "^2.14.0",
     "nuxt-buefy": "^0.3.31"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "jest": {
+    "testEnvironment": "node",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ]
+  }
 }
