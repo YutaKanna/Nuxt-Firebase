@@ -12,6 +12,7 @@
 <script>
 import axios from 'axios';
 export default {
+  layout: 'app',
   async asyncData({ app }) {
     const { data } = await app.$axios.get(`http://localhost:8000/api/bucket-lists`)
     return { bucketLists: data.data.bucketLists }

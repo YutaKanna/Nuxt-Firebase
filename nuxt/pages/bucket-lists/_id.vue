@@ -10,6 +10,7 @@
 <script>
 import axios from 'axios';
 export default {
+  layout: 'app',
   data: function () {
     return {
         title: '',
