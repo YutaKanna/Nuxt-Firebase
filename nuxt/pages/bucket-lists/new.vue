@@ -1,36 +1,27 @@
 <template>
-    <form>
-        <b-field label="Title">
-            <b-input name="title"></b-input>
-        </b-field>
-
-        <b-field label="Description">
-            <b-input name="description"></b-input>
-        </b-field>
-
-        <b-field>
-            <p class="control">
-                <button @click="addData">Click</button>
-            </p>
-        </b-field>
-    </form>
+    <form @submit.prevent="submit">
+      <input type="text" name="title" />
+      <input type="text" name="description" />
+      <button type="submit">submit</button>
+  </form>
 </template>
 
 
 <script>
 import axios from 'axios';
-let url = "http://localhost:8000/api/bucket-lists";
-export default {
-    data: function(){
-        return {
-            title:'',
-            description:'',
-        };
+  export default {
+    data() {
+      return {
+        form: {
+          title: '',
+          description: ''
+        }
+      }
     },
     methods: {
-        addData: function() {
-            alert("hello world!");
-        },
-    },
-}
+      submit: function () {
+        console.log('exec')
+      }
+    }
+  }
 </script>

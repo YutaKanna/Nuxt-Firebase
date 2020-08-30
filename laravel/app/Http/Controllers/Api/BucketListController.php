@@ -41,8 +41,6 @@ class BucketListController extends Controller
         $bucketList->description = $request->description;
 
         $bucketList->save();
-
-        return response()->json(['success'=>'Done!']);
     }
 
 }
