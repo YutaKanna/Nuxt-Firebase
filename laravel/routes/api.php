@@ -21,5 +21,6 @@ Route::get('/', function() {
     return 'helloworld';
 });
 
-Route::get('bucket-lists', 'BucketListController@index');
+Route::get('bucket-lists', 'BucketListController@index')->name('bucket-lists.index');;
 Route::get('bucket-lists/{id}', 'BucketListController@show');
+Route::post('bucket-lists', 'BucketListController@store');

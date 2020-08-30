@@ -33,4 +33,16 @@ class BucketListController extends Controller
             'bucketList' => $bucketList
         ]]);
     }
+
+    public function store(Request $request)
+    {
+        $bucketList = new BucketList;
+        $bucketList->title = $request->title;
+        $bucketList->description = $request->description;
+
+        $bucketList->save();
+
+        return response()->json(['success'=>'Done!']);
+    }
+
 }

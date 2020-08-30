@@ -18,3 +18,4 @@ Route::get('/', function () {
 
 Route::get('bucket-lists', 'BucketListController@index');
 Route::get('bucket-lists/{bucketList}', 'BucketListController@show');
+Route::post('bucket-lists', 'BucketListController@store');
