@@ -6,7 +6,6 @@
   </form>
 </template>
 
-
 <script>
 import axios from 'axios';
   export default {
@@ -19,8 +18,13 @@ import axios from 'axios';
       }
     },
     methods: {
-      submit: function () {
-        console.log('exec')
+      async submit() {
+        console.log('bucket-lists');
+        await this.$axios.$post('http://localhost:8000/api/bucket-listss', {
+          title: this.form.title,
+          description: this.form.description,
+        })
+        this.$router.push({ name: 'bucket-lists' });
       }
     }
   }

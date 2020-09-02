@@ -24,4 +24,4 @@ Route::get('/', function() {
 
 Route::get('bucket-lists', 'Api\BucketListController@index');
 Route::get('bucket-lists/{id}', 'Api\BucketListController@show');
-Route::post('bucket-lists', 'Api\BucketListController@store');
+Route::post('bucket-listss', 'Api\BucketListController@store');
