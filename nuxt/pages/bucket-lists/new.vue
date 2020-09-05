@@ -22,9 +22,7 @@ let url = '/api/bucket-lists/new';
           (url, {
               title: this.title,
               description: this.description,
-          }).then(function(response) {
-          this.router.push('/');
-        });
+          }).then(this.$router.push('/'));
       }
     }
   }
