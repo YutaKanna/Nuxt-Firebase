@@ -61,12 +61,16 @@ export default {
   // },
   // 下だとpost時に500
   axios: {
-    baseURL: 'http://localhost:8000/',
-    credentials: true,
+    prefix: '/api',
     proxy: true
   },
   proxy: {
-    '/api': 'http://localhost:8000', // 追加
+    '/api': {
+      target: 'http://localhost:8000',
+      pathRewrite: {
+        '^/api': '/'
+      }
+    }
   },
   /*
   ** Build configuration

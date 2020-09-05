@@ -1,30 +1,30 @@
 <template>
-    <form @submit.prevent="submit">
-      <input type="text" name="title" />
-      <input type="text" name="description" />
-      <button type="submit">submit</button>
+  <form method="post" @submit.prevent="submit">
+    <input type="text" name="title" v-model="title" />
+    <input type="text" name="description" v-model="description" />
+    <button type="submit">submit</button>
   </form>
 </template>
 
 <script>
 import axios from 'axios';
+let url = '/api/bucket-lists/new';
   export default {
-    data() {
+    data: function() {
       return {
-        form: {
-          title: '',
-          description: ''
-        }
+        title: '',
+        description: ''
       }
     },
     methods: {
       async submit() {
-        console.log('bucket-lists');
-        await this.$axios.$post('http://localhost:8000/api/bucket-listss', {
-          title: this.form.title,
-          description: this.form.description,
-        })
-        this.$router.push({ name: 'bucket-lists' });
+        const response = await this.$axios.$post
+          (url, {
+              title: this.title,
+              description: this.description,
+          }).then(function(response) {
+          this.router.push('/');
+        });
       }
     }
   }
