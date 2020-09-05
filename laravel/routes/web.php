@@ -15,6 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Auth::routes();
 
-Route::get('bucket-lists', 'BucketListController@index');
-Route::get('bucket-lists/{bucketList}', 'BucketListController@show');
+Route::get('/home', 'HomeController@index')->name('home');

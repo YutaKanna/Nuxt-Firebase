@@ -55,20 +55,23 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/proxy'
   ],
+  // axios: {
+  //   baseURL: 'http://localhost:8000/',
+  //   credentials: true
+  // },
+  // 下だとpost時に500
   axios: {
+    prefix: '/api',
     proxy: true
   },
   proxy: {
-    '/api/': {
+    '/api': {
       target: 'http://localhost:8000',
       pathRewrite: {
         '^/api': '/'
       }
     }
   },
-  plugins: [
-    { src: 'plugins/axios.js', ssr: false }
-  ],
   /*
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/

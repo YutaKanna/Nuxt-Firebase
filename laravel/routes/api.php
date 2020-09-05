@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,5 +22,6 @@ Route::get('/', function() {
     return 'helloworld';
 });
 
-Route::get('bucket-lists', 'BucketListController@index');
-Route::get('bucket-lists/{id}', 'BucketListController@show');
+Route::get('bucket-lists', 'Api\BucketListController@index');
+Route::get('bucket-lists/{id}', 'Api\BucketListController@show');
+Route::post('bucket-lists/new', 'Api\BucketListController@store');
