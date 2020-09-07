@@ -1,5 +1,5 @@
 <template>
-  <form method="post" @submit.prevent="submit">
+  <form method="post" action = "http://localhost:8000/api/bucket-lists/new" @submit.prevent="post">
     <input type="text" name="title" v-model="title" />
     <input type="text" name="description" v-model="description" />
     <button type="submit">submit</button>
@@ -8,7 +8,10 @@
 
 <script>
 import axios from 'axios';
-let url = '/api/bucket-lists/new';
+var axiosPost = axios.create({
+  xsrfHeaderName: "X-XSRF-TOKEN",
+  withCredentials: true
+})
   export default {
     data: function() {
       return {
@@ -17,12 +20,13 @@ let url = '/api/bucket-lists/new';
       }
     },
     methods: {
-      async submit() {
-        const response = await this.$axios.$post
-          (url, {
-              title: this.title,
-              description: this.description,
-          }).then(this.$router.push('/'));
+      async post() {
+        const url = "http://localhost:8000/api/bucket-lists/new";
+        await axiosPost.post(url, {
+          title: this.title,
+          description: this.description,
+          withCredentials: true,
+        }).then(this.$router.push('/bucket-lists'));
       }
     }
   }
