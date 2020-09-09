@@ -43,4 +43,12 @@ class BucketListController extends Controller
         $bucketList->save();
     }
 
+
+    public function destroy($id)
+    {
+        $bucketList = BucketList::find($id);
+        $bucketList->delete();
+    }
+
+
 }
