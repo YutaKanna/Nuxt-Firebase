@@ -1,7 +1,6 @@
 <template>
   <div>
     <section class="container">
-        <div>hoge</div>
         <ul v-for="(bucketList, key) in bucketLists">
             <li>{{bucketList.title}} [{{key}}]</li>
         </ul>
