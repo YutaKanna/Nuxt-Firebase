@@ -1,14 +1,12 @@
 <template>
   <div>
     <section class="container">
-        <form method="post" action="http://localhost:8000/api/bucket-lists/${this.$route.params.id}"　@submit.prevent="updatete">
+        <form method="post" @submit.prevent="updatete">
           <input type="text" name="title" v-model="bucketList.title" />
           <input type="text" name="description" v-model="bucketList.description" />
           <button type="submit">更新</button>
         </form>
-        <form method="post" @submit.prevent="deletete">
-            <button type="submit">削除</button>
-        </form>
+
     </section>
   </div>
 </template>
@@ -23,8 +21,8 @@ export default {
   layout: 'app',
   data: function () {
     return {
-        title: '',
-        description: '',
+      title: '',
+      description: '',
     }
   },
   async asyncData({params}) {
@@ -33,10 +31,10 @@ export default {
   },
   methods: {
     async updatete() {
-      await axiosPost.put
+      await axiosPost.patch
       (`http://localhost:8000/api/bucket-lists/${this.$route.params.id}`, {
-        title: this.title,
-        description: this.description,
+        title: this.bucketList.title,
+        description: this.bucketList.description,
         withCredentials: true,
       }).then(this.$router.push('/bucket-lists'));
     },
