@@ -43,6 +43,13 @@ class BucketListController extends Controller
         $bucketList->save();
     }
 
+    public function update(Request $request, $id)
+    {
+        $bucketList = BucketList::find($id);
+        $bucketList->title = $request->title;
+        $bucketList->description = $request->description;
+        $bucketList->save();
+    }
 
     public function destroy($id)
     {
