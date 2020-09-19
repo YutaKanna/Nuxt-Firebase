@@ -14,18 +14,16 @@
             <el-form-item label="Description*">
                 <el-input name="description" type="textarea" v-model="form.description"></el-input>
             </el-form-item>
-            <el-form-item label="label">
-                <el-select v-model="value" placeholder="select the type of bucket list">
-                    <el-option
-                      v-for="item in form.options"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value">
-                    </el-option>
+            <el-form-item label="type">
+                <el-select name="type" v-model="type" placeholder="select the type of bucket list">
+                    <el-option label="Business" value="1"></el-option>
+                    <el-option label="Sport" value="2"></el-option>
+                    <el-option label="Hubby" value="3"></el-option>
+                    <el-option label="Other" value="4"></el-option>
                 </el-select>
             </el-form-item>
             <el-form-item label="Gender">
-                <el-radio-group v-model="form.gender">
+                <el-radio-group v-model="form.gender" name="gender">
                 <el-radio label="Man" value="1"></el-radio>
                 <el-radio label="Woman" value="2"></el-radio>
                 <el-radio label="None" value="3"></el-radio>
@@ -38,17 +36,18 @@
                 <el-checkbox v-model="form.trigger4" label="By someone else" name="trigger4"></el-checkbox>
             </el-form-item>
             <el-form-item label="Publishing">
-                <el-switch v-model="form.publishing"></el-switch>
+                <el-switch v-model="form.publishing" name="publishing"></el-switch>
             </el-form-item>
             <el-form-item label="Input number">
-                <el-input-number v-model="form.num" @change="handleChange" :min="1" :max="10"></el-input-number>
+                <el-input-number v-model="form.num" name="num" @change="handleChange" :min="1" :max="10"></el-input-number>
             </el-form-item>
             <el-form-item label="Seriousness">
-                <el-rate v-model="form.seriousness"></el-rate>
+                <el-rate v-model="form.seriousness" name="seriousness"></el-rate>
             </el-form-item>
             <el-form-item label="Time limit">
                 <el-date-picker
                     v-model="form.date"
+                    name="date"
                     type="date"
                     placeholder="Pick a day">
                 </el-date-picker>
@@ -57,6 +56,7 @@
                 <el-time-select
                     placeholder="Time limit(start)"
                     v-model="form.startTime"
+                    name="startTime"
                     :picker-options="{
                     start: '00:00',
                     step: '1:00',
@@ -67,6 +67,7 @@
                 <el-time-select
                     placeholder="Time limit(end)"
                     v-model="form.endTime"
+                    name="endTime"
                     :picker-options="{
                     start: '00:00',
                     step: '1:00',
@@ -133,20 +134,7 @@ var axiosPost = axios.create({
         form: {
           title: '',
           description: '',
-          options: [{
-            value: '1',
-            label: 'Business'
-            }, {
-            value: '2',
-            label: 'Sport'
-            }, {
-            value: '3',
-            label: 'Hubby'
-            }, {
-            value: '4',
-            label: 'Other'
-          }],
-          value: '',
+          type: '',
           gender: '',
           trigger1: '',
           trigger2: '',
@@ -168,6 +156,18 @@ var axiosPost = axios.create({
         await axiosPost.post(url, {
           title: this.title,
           description: this.description,
+          type: this.type,
+          gender: this.gender,
+          trigger1: this.trigger1,
+          trigger2: this.trigger2,
+          trigger3: this.trigger3,
+          trigger4: this.trigger4,
+          publishing: this.publishing,
+          num: this.num,
+          seriousness: this.seriousness,
+          date: this.date,
+          startTime: this.startTime,
+          endTime: this.endTime,
           withCredentials: true,
         }).then(this.$router.push('/bucket-lists'));
       },
