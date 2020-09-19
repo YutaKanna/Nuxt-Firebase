@@ -1,58 +1,59 @@
 <template>
   <div class="container">
     <div>
-        <el-row :gutter="20">
+        <!-- <el-row :gutter="20">
             <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
             <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
             <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
             <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-        </el-row>
+        </el-row> -->
         <el-form ref="form" :model="form" label-width="120px">
-            <el-form-item label="Input">
-                <el-input v-model="form.name"></el-input>
+            <el-form-item label="Title*">
+                <el-input name="title" v-model="form.title"></el-input>
             </el-form-item>
-            <el-form-item label="Textarea">
-                <el-input type="textarea" v-model="form.desc"></el-input>
+            <el-form-item label="Description*">
+                <el-input name="description" type="textarea" v-model="form.description"></el-input>
             </el-form-item>
-            <el-form-item label="Select">
-                <el-select v-model="form.region" placeholder="please select your zone">
+            <el-form-item label="Type*">
+                <el-select v-model="form.type" placeholder="select the type of bucket list">
                 <el-option label="Zone one" value="shanghai"></el-option>
                 <el-option label="Zone two" value="beijing"></el-option>
                 </el-select>
             </el-form-item>
-            <el-form-item label="Radio">
+            <el-form-item label="Gender">
                 <el-radio-group v-model="form.resource">
-                <el-radio label="Sponsor"></el-radio>
-                <el-radio label="Venue"></el-radio>
+                <el-radio label="Man"></el-radio>
+                <el-radio label="Woman"></el-radio>
+                <el-radio label="None"></el-radio>
                 </el-radio-group>
             </el-form-item>
-            <el-form-item label="Check box">
+            <el-form-item label="Trigger">
                 <el-checkbox-group v-model="form.type">
-                <el-checkbox label="Online activities" name="type"></el-checkbox>
-                <el-checkbox label="Promotion activities" name="type"></el-checkbox>
-                <el-checkbox label="Offline activities" name="type"></el-checkbox>
-                <el-checkbox label="Simple brand exposure" name="type"></el-checkbox>
+                <el-checkbox label="Just come up" name="type"></el-checkbox>
+                <el-checkbox label="Books" name="type"></el-checkbox>
+                <el-checkbox label="Youtube" name="type"></el-checkbox>
+                <el-checkbox label="By someone else" name="type"></el-checkbox>
                 </el-checkbox-group>
             </el-form-item>
-            <el-form-item label="Switch">
-                <el-switch v-model="form.delivery"></el-switch>
+            <el-form-item label="Publishing">
+                <el-switch v-model="form.publishing"></el-switch>
             </el-form-item>
             <el-form-item label="Input number">
                 <el-input-number v-model="form.num" @change="handleChange" :min="1" :max="10"></el-input-number>
             </el-form-item>
-            <el-form-item label="Rate">
-                <el-rate v-model="form.value1"></el-rate>
+            <el-form-item label="Seriousness">
+                <el-rate v-model="form.seriousness"></el-rate>
             </el-form-item>
-            <el-form-item label="Date picker">
+            <el-form-item label="Time limit">
                 <el-date-picker
                     v-model="form.date"
                     type="date"
                     placeholder="Pick a day">
                 </el-date-picker>
             </el-form-item>
-            <el-form-item label="Time picker">
+            <el-form-item label="limit(start・end)">
                 <el-time-select
-                    placeholder="Start time"
+                    placeholder="Time limit(start)"
                     v-model="form.startTime"
                     :picker-options="{
                     start: '08:30',
@@ -62,7 +63,7 @@
                     }">
                 </el-time-select>
                 <el-time-select
-                    placeholder="End time"
+                    placeholder="Time limit(end)"
                     v-model="form.endTime"
                     :picker-options="{
                     start: '08:30',
