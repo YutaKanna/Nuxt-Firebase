@@ -31,6 +31,28 @@
                     placeholder="Pick a day">
                 </el-date-picker>
             </el-form-item>
+            <el-form-item label="limit" prop="startTime">
+                <el-time-select
+                    placeholder="Time limit(start)"
+                    v-model="ruleForm.startTime"
+                    :picker-options="{
+                    start: '00:00',
+                    step: '1:00',
+                    end: '23:00',
+                    maxTime: ruleForm.endTime
+                    }">
+                </el-time-select>
+                <el-time-select
+                    placeholder="Time limit(end)"
+                    v-model="ruleForm.endTime"
+                    :picker-options="{
+                    start: '00:00',
+                    step: '1:00',
+                    end: '23:00',
+                    minTime: ruleForm.startTime
+                    }">
+                </el-time-select>
+            </el-form-item>
             <el-form-item>
                 <el-button>Cancel</el-button>
                 <el-button type="primary" native-type="submit">Submit!</el-button>
@@ -93,6 +115,8 @@ var axiosPost = axios.create({
           gender: '',
           publishing: '',
           date: '',
+          startTime: '',
+          endTime: ''
         },
         rules: {
           title: [
@@ -113,6 +137,12 @@ var axiosPost = axios.create({
           date: [
             { required: true, message: 'Please select Type', trigger: 'change' }
           ],
+          startTime: [
+            { required: true, message: 'Please select Type', trigger: 'change' }
+          ],
+          endTime: [
+            { required: true, message: 'Please select Type', trigger: 'change' }
+          ],
         }
       };
     },
@@ -128,6 +158,8 @@ var axiosPost = axios.create({
                 gender: this.ruleForm.gender,
                 publishing: this.ruleForm.publishing,
                 date: this.ruleForm.date,
+                startTime: this.ruleForm.startTime,
+                endTime: this.ruleForm.endTime,
                 withCredentials: true,
             }).then(this.$router.push('/bucket-lists'));
           } else {

@@ -49,8 +49,9 @@ class BucketListController extends Controller
         $date = substr($request->date, 0, 10);
         // \Log::debug($date);
         $bucketList->date = $date;
-        // $bucketList->start = $request->startTime;
-        // $bucketList->end = $request->endTime;
+        \Log::debug($request->startTime);
+        $bucketList->start = $request->startTime;
+        $bucketList->end = $request->endTime;
 
         $bucketList->save();
 
