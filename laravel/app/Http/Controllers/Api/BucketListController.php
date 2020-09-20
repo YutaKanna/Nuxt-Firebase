@@ -40,7 +40,7 @@ class BucketListController extends Controller
         $bucketList->title = $request->title;
         $bucketList->description = $request->description;
         $bucketList->type_id = $request->type;
-        $bucketList->gender_id = 1;
+        $bucketList->gender_id = $request->gender;
         // $bucketList->type_id = $request->type->id;
         // $bucketList->gender_id = $request->gender->id;
         // $bucketList->publishing = $request->publishing;

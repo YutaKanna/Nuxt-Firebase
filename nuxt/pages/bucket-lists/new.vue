@@ -14,9 +14,22 @@
             <el-form-item label="Description*">
                 <el-input name="description" type="textarea" v-model="form.description"></el-input>
             </el-form-item>
+            <el-form-item label="type">
+                <el-select name="type" v-model="form.type" placeholder="select the type of bucket list">
+                    <el-option label="Business" value="1"></el-option>
+                    <el-option label="Sport" value="2"></el-option>
+                    <el-option label="Hubby" value="3"></el-option>
+                    <el-option label="Other" value="4"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="Gender">
+                <el-radio v-model="form.gender" label="1">Man</el-radio>
+                <el-radio v-model="form.gender" label="2">Woman</el-radio>
+                <el-radio v-model="form.gender"　label="3">None</el-radio>
+            </el-form-item>
             <el-form-item>
                 <el-button>Cancel</el-button>
-                <el-button type="primary" native-type="submit">占う</el-button>
+                <el-button type="primary" native-type="submit">Submit!</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -89,6 +102,8 @@ var axiosPost = axios.create({
         await axiosPost.post(url, {
           title: this.form.title,
           description: this.form.description,
+          type: this.form.type,
+          gender: this.form.gender,
           withCredentials: true,
         }).then(this.$router.push('/bucket-lists'));
       },
