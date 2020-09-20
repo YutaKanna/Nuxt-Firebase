@@ -39,8 +39,22 @@ class BucketListController extends Controller
         $bucketList = new BucketList;
         $bucketList->title = $request->title;
         $bucketList->description = $request->description;
+        $bucketList->type_id = 1;
+        $bucketList->gender_id = 1;
+        // $bucketList->type_id = $request->type->id;
+        // $bucketList->gender_id = $request->gender->id;
+        // $bucketList->publishing = $request->publishing;
+        // $bucketList->num = $request->num;
+        // $bucketList->seriousness = $request->seriousness;
+        // $bucketList->date = $request->date;
+        // $bucketList->start = $request->startTime;
+        // $bucketList->end = $request->endTime;
 
         $bucketList->save();
+
+        // foreach ($request->triggers as $triggerId) {
+        //     $bucketList->bucketListTriggers()->attach($triggerId);
+        // }
     }
 
     public function update(Request $request, $id)
