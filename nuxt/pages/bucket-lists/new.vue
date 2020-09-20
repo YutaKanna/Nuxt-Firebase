@@ -1,34 +1,28 @@
 <template>
   <div class="container">
     <div>
-        <!-- <el-row :gutter="20">
-            <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-            <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-            <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-            <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
-        </el-row> -->
-        <el-form ref="form" :model="form" label-width="120px" method="post" action="http://localhost:8000/api/bucket-lists/new" @submit.native.prevent="postte">
-            <el-form-item label="Title*">
-                <el-input name="title" v-model="form.title"></el-input>
+        <el-form ref="ruleForm" :model="ruleForm" :rules="rules" label-width="120px" method="post" action="http://localhost:8000/api/bucket-lists/new" @submit.native.prevent="postte('ruleForm')">
+            <el-form-item label="Title" prop="title">
+                <el-input name="title" v-model="ruleForm.title"></el-input>
             </el-form-item>
-            <el-form-item label="Description*">
-                <el-input name="description" type="textarea" v-model="form.description"></el-input>
+            <el-form-item label="Description" prop="description">
+                <el-input name="description" type="textarea" v-model="ruleForm.description"></el-input>
             </el-form-item>
-            <el-form-item label="type">
-                <el-select name="type" v-model="form.type" placeholder="select the type of bucket list">
+            <el-form-item label="type" prop="type">
+                <el-select name="type" v-model="ruleForm.type" placeholder="select the type of bucket list">
                     <el-option label="Business" value="1"></el-option>
                     <el-option label="Sport" value="2"></el-option>
                     <el-option label="Hubby" value="3"></el-option>
                     <el-option label="Other" value="4"></el-option>
                 </el-select>
             </el-form-item>
-            <el-form-item label="Gender">
-                <el-radio v-model="form.gender" label="1">Man</el-radio>
-                <el-radio v-model="form.gender" label="2">Woman</el-radio>
-                <el-radio v-model="form.gender"　label="3">None</el-radio>
+            <el-form-item label="Gender" prop="gender">
+                <el-radio v-model="ruleForm.gender" label="1">Man</el-radio>
+                <el-radio v-model="ruleForm.gender" label="2">Woman</el-radio>
+                <el-radio v-model="ruleForm.gender"　label="3">None</el-radio>
             </el-form-item>
-            <el-form-item label="Publishing">
-                <el-switch v-model="form.publishing" name="publishing"></el-switch>
+            <el-form-item label="Publishing" prop="publishing">
+                <el-switch v-model="ruleForm.publishing" name="publishing"></el-switch>
             </el-form-item>
             <el-form-item>
                 <el-button>Cancel</el-button>
@@ -85,31 +79,50 @@ var axiosPost = axios.create({
   export default {
     data: function() {
       return {
-        form: {
+        ruleForm: {
           title: '',
           description: '',
           type: '',
           gender: '',
           publishing: '',
-          num: 1,
-          seriousness: '',
-          date: '',
-          startTime: '',
-          endTime: ''
+        },
+        rules: {
+          title: [
+            { required: true, message: 'Please input Title', trigger: 'blur' }
+          ],
+          description: [
+            { required: true, message: 'Please input Description', trigger: 'blur' }
+          ],
+          type: [
+            { required: true, message: 'Please select Type', trigger: 'change' }
+          ],
+          gender: [
+            { required: true, message: 'Please select Type', trigger: 'change' }
+          ],
+          publishing: [
+            { required: true, message: 'Please select Type', trigger: 'change' }
+          ],
         }
-      }
+      };
     },
     methods: {
-      async postte() {
-        const url = "http://localhost:8000/api/bucket-lists/new";
-        await axiosPost.post(url, {
-          title: this.form.title,
-          description: this.form.description,
-          type: this.form.type,
-          gender: this.form.gender,
-          publishing: this.form.publishing,
-          withCredentials: true,
-        }).then(this.$router.push('/bucket-lists'));
+      postte(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            const url = "http://localhost:8000/api/bucket-lists/new";
+            axiosPost.post(url, {
+                title: this.ruleForm.title,
+                description: this.ruleForm.description,
+                type: this.ruleForm.type,
+                gender: this.ruleForm.gender,
+                publishing: this.ruleForm.publishing,
+                withCredentials: true,
+            }).then(this.$router.push('/bucket-lists'));
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
       },
     }
   }
