@@ -24,6 +24,13 @@
             <el-form-item label="Publishing" prop="publishing">
                 <el-switch v-model="ruleForm.publishing" name="publishing"></el-switch>
             </el-form-item>
+            <el-form-item label="Time limit" prop="date">
+                <el-date-picker
+                    v-model="ruleForm.date"
+                    type="date"
+                    placeholder="Pick a day">
+                </el-date-picker>
+            </el-form-item>
             <el-form-item>
                 <el-button>Cancel</el-button>
                 <el-button type="primary" native-type="submit">Submit!</el-button>
@@ -85,6 +92,7 @@ var axiosPost = axios.create({
           type: '',
           gender: '',
           publishing: '',
+          date: '',
         },
         rules: {
           title: [
@@ -102,6 +110,9 @@ var axiosPost = axios.create({
           publishing: [
             { required: true, message: 'Please select Type', trigger: 'change' }
           ],
+          date: [
+            { required: true, message: 'Please select Type', trigger: 'change' }
+          ],
         }
       };
     },
@@ -116,6 +127,7 @@ var axiosPost = axios.create({
                 type: this.ruleForm.type,
                 gender: this.ruleForm.gender,
                 publishing: this.ruleForm.publishing,
+                date: this.ruleForm.date,
                 withCredentials: true,
             }).then(this.$router.push('/bucket-lists'));
           } else {

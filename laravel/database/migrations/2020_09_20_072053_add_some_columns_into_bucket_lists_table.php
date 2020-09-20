@@ -21,7 +21,7 @@ class AddSomeColumnsIntoBucketListsTable extends Migration
             $table->integer('publishing')->default(0);
             $table->integer('num')->default(0);
             $table->integer('seriousness')->default(0);
-            $table->date('date')->nullable();
+            $table->datetime('date')->nullable();
             $table->time('start')->nullable();
             $table->time('end')->nullable();
         });
