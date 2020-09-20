@@ -29,12 +29,12 @@
                 <el-radio label="None" value="3"></el-radio>
                 </el-radio-group>
             </el-form-item>
-            <el-form-item label="Trigger">
-                <el-checkbox v-model="form.trigger1" label="Just come up" name="trigger1"></el-checkbox>
-                <el-checkbox v-model="form.trigger2" label="Books" name="trigger2"></el-checkbox>
-                <el-checkbox v-model="form.trigger3" label="Youtube" name="trigger3"></el-checkbox>
-                <el-checkbox v-model="form.trigger4" label="By someone else" name="trigger4"></el-checkbox>
-            </el-form-item>
+            <!-- <el-form-item label="Trigger">
+                <el-checkbox v-model="form.trigger1" label="Just come up" name="triggers[]"></el-checkbox>
+                <el-checkbox v-model="form.trigger2" label="Books" name="trigger[]"></el-checkbox>
+                <el-checkbox v-model="form.trigger3" label="Youtube" name="trigger[]"></el-checkbox>
+                <el-checkbox v-model="form.trigger4" label="By someone else" name="trigger[]"></el-checkbox>
+            </el-form-item> -->
             <el-form-item label="Publishing">
                 <el-switch v-model="form.publishing" name="publishing"></el-switch>
             </el-form-item>
@@ -136,10 +136,6 @@ var axiosPost = axios.create({
           description: '',
           type: '',
           gender: '',
-          trigger1: '',
-          trigger2: '',
-          trigger3: '',
-          trigger4: '',
           publishing: '',
           num: 1,
           seriousness: '',
@@ -152,22 +148,9 @@ var axiosPost = axios.create({
     methods: {
       async postte() {
         const url = "http://localhost:8000/api/bucket-lists/new";
-        console.log('submit!');
         await axiosPost.post(url, {
           title: this.title,
           description: this.description,
-          type: this.type,
-          gender: this.gender,
-          trigger1: this.trigger1,
-          trigger2: this.trigger2,
-          trigger3: this.trigger3,
-          trigger4: this.trigger4,
-          publishing: this.publishing,
-          num: this.num,
-          seriousness: this.seriousness,
-          date: this.date,
-          startTime: this.startTime,
-          endTime: this.endTime,
           withCredentials: true,
         }).then(this.$router.push('/bucket-lists'));
       },
