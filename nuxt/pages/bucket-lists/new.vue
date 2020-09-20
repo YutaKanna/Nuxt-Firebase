@@ -27,6 +27,9 @@
                 <el-radio v-model="form.gender" label="2">Woman</el-radio>
                 <el-radio v-model="form.gender"　label="3">None</el-radio>
             </el-form-item>
+            <el-form-item label="Publishing">
+                <el-switch v-model="form.publishing" name="publishing"></el-switch>
+            </el-form-item>
             <el-form-item>
                 <el-button>Cancel</el-button>
                 <el-button type="primary" native-type="submit">Submit!</el-button>
@@ -104,6 +107,7 @@ var axiosPost = axios.create({
           description: this.form.description,
           type: this.form.type,
           gender: this.form.gender,
+          publishing: this.form.publishing,
           withCredentials: true,
         }).then(this.$router.push('/bucket-lists'));
       },

@@ -41,9 +41,8 @@ class BucketListController extends Controller
         $bucketList->description = $request->description;
         $bucketList->type_id = $request->type;
         $bucketList->gender_id = $request->gender;
-        // $bucketList->type_id = $request->type->id;
-        // $bucketList->gender_id = $request->gender->id;
-        // $bucketList->publishing = $request->publishing;
+        // 0がfalse, 1がtrue
+        $bucketList->publishing = $request->publishing;
         // $bucketList->num = $request->num;
         // $bucketList->seriousness = $request->seriousness;
         // $bucketList->date = $request->date;
