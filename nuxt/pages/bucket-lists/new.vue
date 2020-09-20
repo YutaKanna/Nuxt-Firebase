@@ -7,78 +7,16 @@
             <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
             <el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
         </el-row> -->
-        <el-form ref="form" :model="form" label-width="120px" method="post" action="http://localhost:8000/api/bucket-lists/new">
+        <el-form ref="form" :model="form" label-width="120px" method="post" action="http://localhost:8000/api/bucket-lists/new" @submit.native.prevent="postte">
             <el-form-item label="Title*">
                 <el-input name="title" v-model="form.title"></el-input>
             </el-form-item>
             <el-form-item label="Description*">
                 <el-input name="description" type="textarea" v-model="form.description"></el-input>
             </el-form-item>
-            <el-form-item label="type">
-                <el-select name="type" v-model="type" placeholder="select the type of bucket list">
-                    <el-option label="Business" value="1"></el-option>
-                    <el-option label="Sport" value="2"></el-option>
-                    <el-option label="Hubby" value="3"></el-option>
-                    <el-option label="Other" value="4"></el-option>
-                </el-select>
-            </el-form-item>
-            <el-form-item label="Gender">
-                <el-radio-group v-model="form.gender" name="gender">
-                <el-radio label="Man" value="1"></el-radio>
-                <el-radio label="Woman" value="2"></el-radio>
-                <el-radio label="None" value="3"></el-radio>
-                </el-radio-group>
-            </el-form-item>
-            <!-- <el-form-item label="Trigger">
-                <el-checkbox v-model="form.trigger1" label="Just come up" name="triggers[]"></el-checkbox>
-                <el-checkbox v-model="form.trigger2" label="Books" name="trigger[]"></el-checkbox>
-                <el-checkbox v-model="form.trigger3" label="Youtube" name="trigger[]"></el-checkbox>
-                <el-checkbox v-model="form.trigger4" label="By someone else" name="trigger[]"></el-checkbox>
-            </el-form-item> -->
-            <el-form-item label="Publishing">
-                <el-switch v-model="form.publishing" name="publishing"></el-switch>
-            </el-form-item>
-            <el-form-item label="Input number">
-                <el-input-number v-model="form.num" name="num" @change="handleChange" :min="1" :max="10"></el-input-number>
-            </el-form-item>
-            <el-form-item label="Seriousness">
-                <el-rate v-model="form.seriousness" name="seriousness"></el-rate>
-            </el-form-item>
-            <el-form-item label="Time limit">
-                <el-date-picker
-                    v-model="form.date"
-                    name="date"
-                    type="date"
-                    placeholder="Pick a day">
-                </el-date-picker>
-            </el-form-item>
-            <el-form-item label="limit(start・end)">
-                <el-time-select
-                    placeholder="Time limit(start)"
-                    v-model="form.startTime"
-                    name="startTime"
-                    :picker-options="{
-                    start: '00:00',
-                    step: '1:00',
-                    end: '23:00',
-                    maxTime: form.endTime
-                    }">
-                </el-time-select>
-                <el-time-select
-                    placeholder="Time limit(end)"
-                    v-model="form.endTime"
-                    name="endTime"
-                    :picker-options="{
-                    start: '00:00',
-                    step: '1:00',
-                    end: '23:00',
-                    minTime: form.startTime
-                    }">
-                </el-time-select>
-            </el-form-item>
             <el-form-item>
                 <el-button>Cancel</el-button>
-                <el-button type="primary" @click="onSubmit">Submit!</el-button>
+                <el-button type="primary" native-type="submit">占う</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -149,17 +87,11 @@ var axiosPost = axios.create({
       async postte() {
         const url = "http://localhost:8000/api/bucket-lists/new";
         await axiosPost.post(url, {
-          title: this.title,
-          description: this.description,
+          title: this.form.title,
+          description: this.form.description,
           withCredentials: true,
         }).then(this.$router.push('/bucket-lists'));
       },
-      handleChange(value) {
-        console.log(value)
-      },
-      onSubmit() {
-        this.postte()
-      }
     }
   }
 </script>
