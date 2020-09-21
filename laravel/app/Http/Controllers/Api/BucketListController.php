@@ -36,6 +36,7 @@ class BucketListController extends Controller
 
     public function store(Request $request)
     {
+        \Log::debug($request);
         $bucketList = new BucketList;
         $bucketList->title = $request->title;
         $bucketList->description = $request->description;
@@ -49,6 +50,13 @@ class BucketListController extends Controller
         $bucketList->date = $date;
         $bucketList->start = $request->startTime;
         $bucketList->end = $request->endTime;
+
+        \Log::debug($request->dialogImageUrl);
+
+        if ($request->dialogImageUrl){
+            $file_name = $request->file('fileList')->store('assets/images');
+            $event->imageUrl = basename($file_name);
+        }
 
         $bucketList->save();
 

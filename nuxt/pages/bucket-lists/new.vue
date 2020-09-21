@@ -38,7 +38,7 @@
                 <el-checkbox v-model="ruleForm.trigger4" label="By someone else"></el-checkbox>
             </el-form-item>
             <el-form-item label="Publishing" prop="publishing">
-                <el-switch v-model="ruleForm.publishing" name="publishing"></el-switch>
+                <el-switch v-model="ruleForm.publishing" type="number" name="publishing"></el-switch>
             </el-form-item>
             <el-form-item label="Input number">
                 <el-input-number v-model="ruleForm.num" :min="1" :max="10"></el-input-number>
@@ -74,6 +74,34 @@
                     minTime: ruleForm.startTime
                     }">
                 </el-time-select>
+            </el-form-item>
+            <el-form-item label="image">
+                <el-upload
+                    action="#"
+                    v-model="ruleForm.file"
+                    name="dialogImageUrl"
+                    list-type="picture-card"
+                    :auto-upload="false">
+                        <i slot="default" class="el-icon-plus"></i>
+                        <div slot="file" slot-scope="{file}">
+                            <img
+                                class="el-upload-list__item-thumbnail"
+                                :src="file.url" alt=""
+                            >
+                            <span class="el-upload-list__item-actions">
+                                <span
+                                class="el-upload-list__item-preview"
+                                @click="handlePictureCardPreview(file)"
+                                >
+                                <i class="el-icon-zoom-in"></i>
+                                </span>
+                            </span>
+                        </span>
+                        </div>
+                </el-upload>
+                <el-dialog :visible.sync="ruleForm.dialogVisible">
+                  <img width="100%" :src="ruleForm.dialogImageUrl" alt="">
+                </el-dialog>
             </el-form-item>
             <el-form-item>
                 <el-button>Cancel</el-button>
@@ -144,7 +172,9 @@ var axiosPost = axios.create({
           seriousness: null,
           date: '',
           startTime: '',
-          endTime: ''
+          endTime: '',
+          dialogImageUrl: [],
+          dialogVisible: false,
         },
         rules: {
           title: [
@@ -189,32 +219,45 @@ var axiosPost = axios.create({
           endTime: [
             { required: true, message: 'Please select Type', trigger: 'change' }
           ],
+          dialogImageUrl: [
+            { type: 'array' }
+          ],
         }
       };
     },
     methods: {
+      handlePictureCardPreview(file) {
+        this.ruleForm.dialogImageUrl = file.url;
+        this.ruleForm.dialogVisible = true;
+      },
       postte(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            console.log(this.ruleForm.triggers);
             const url = "http://localhost:8000/api/bucket-lists/new";
-            axiosPost.post(url, {
-                title: this.ruleForm.title,
-                description: this.ruleForm.description,
-                type: this.ruleForm.type,
-                gender: this.ruleForm.gender,
-                trigger1: this.ruleForm.trigger1,
-                trigger2: this.ruleForm.trigger2,
-                trigger3: this.ruleForm.trigger3,
-                trigger4: this.ruleForm.trigger4,
-                publishing: this.ruleForm.publishing,
-                num: this.ruleForm.num,
-                seriousness: this.ruleForm.seriousness,
-                date: this.ruleForm.date,
-                startTime: this.ruleForm.startTime,
-                endTime: this.ruleForm.endTime,
-                withCredentials: true,
-            }).then(this.$router.push('/bucket-lists'));
+            let request = new FormData();
+            request.append('title', this.ruleForm.title)
+            request.append('description', this.ruleForm.description)
+            request.append('type', this.ruleForm.type)
+            request.append('gender', this.ruleForm.gender)
+            request.append('trigger1', this.ruleForm.trigger1)
+            request.append('trigger2', this.ruleForm.trigger2)
+            request.append('trigger3', this.ruleForm.trigger3)
+            request.append('trigger4', this.ruleForm.trigger4)
+            request.append('publishing', 1)
+            request.append('num', this.ruleForm.num)
+            request.append('seriousness', this.ruleForm.seriousness)
+            request.append('date', this.ruleForm.date)
+            request.append('startTime', this.ruleForm.startTime)
+            request.append('endTime', this.ruleForm.endTime)
+            request.append('dialogImageUrl', this.ruleForm.dialogImageUrl)
+            axiosPost.post(url,
+            request,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            }
+            ).then(this.$router.push('/bucket-lists'));
           } else {
             console.log('error submit!!');
             return false;
