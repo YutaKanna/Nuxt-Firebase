@@ -24,6 +24,9 @@
             <el-form-item label="Publishing" prop="publishing">
                 <el-switch v-model="ruleForm.publishing" name="publishing"></el-switch>
             </el-form-item>
+            <el-form-item label="Seriousness" prop="seriousness">
+                <el-rate v-model="ruleForm.seriousness"></el-rate>
+            </el-form-item>
             <el-form-item label="Time limit" prop="date">
                 <el-date-picker
                     v-model="ruleForm.date"
@@ -114,6 +117,7 @@ var axiosPost = axios.create({
           type: '',
           gender: '',
           publishing: '',
+          seriousness: null,
           date: '',
           startTime: '',
           endTime: ''
@@ -132,6 +136,9 @@ var axiosPost = axios.create({
             { required: true, message: 'Please select Type', trigger: 'change' }
           ],
           publishing: [
+            { required: true, message: 'Please select Type', trigger: 'change' }
+          ],
+          seriousness: [
             { required: true, message: 'Please select Type', trigger: 'change' }
           ],
           date: [
@@ -157,6 +164,7 @@ var axiosPost = axios.create({
                 type: this.ruleForm.type,
                 gender: this.ruleForm.gender,
                 publishing: this.ruleForm.publishing,
+                seriousness: this.ruleForm.seriousness,
                 date: this.ruleForm.date,
                 startTime: this.ruleForm.startTime,
                 endTime: this.ruleForm.endTime,

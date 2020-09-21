@@ -44,10 +44,9 @@ class BucketListController extends Controller
         // 0がfalse, 1がtrue
         $bucketList->publishing = $request->publishing;
         // $bucketList->num = $request->num;
-        // $bucketList->seriousness = $request->seriousness;
+        $bucketList->seriousness = $request->seriousness;
         // $bucketList->date = "2020-09-29";
         $date = substr($request->date, 0, 10);
-        // \Log::debug($date);
         $bucketList->date = $date;
         \Log::debug($request->startTime);
         $bucketList->start = $request->startTime;
