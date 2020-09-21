@@ -43,7 +43,7 @@ class BucketListController extends Controller
         $bucketList->gender_id = $request->gender;
         // 0がfalse, 1がtrue
         $bucketList->publishing = $request->publishing;
-        // $bucketList->num = $request->num;
+        $bucketList->num = $request->num;
         $bucketList->seriousness = $request->seriousness;
         // $bucketList->date = "2020-09-29";
         $date = substr($request->date, 0, 10);
