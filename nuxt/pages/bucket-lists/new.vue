@@ -21,6 +21,22 @@
                 <el-radio v-model="ruleForm.gender" label="2">Woman</el-radio>
                 <el-radio v-model="ruleForm.gender"　label="3">None</el-radio>
             </el-form-item>
+
+            <!-- <el-form-item label="Trigger">
+                <el-checkbox-group v-model="ruleForm.triggers">
+                    <el-checkbox label="Just come up"></el-checkbox>
+                    <el-checkbox label="Books"></el-checkbox>
+                    <el-checkbox label="Youtube"></el-checkbox>
+                    <el-checkbox label="By someone else"></el-checkbox>
+                </el-checkbox-group>
+            </el-form-item> -->
+
+            <el-form-item label="Trigger">
+                <el-checkbox v-model="ruleForm.trigger1" label="Just come up"></el-checkbox>
+                <el-checkbox v-model="ruleForm.trigger2" label="Books"></el-checkbox>
+                <el-checkbox v-model="ruleForm.trigger3" label="Youtube"></el-checkbox>
+                <el-checkbox v-model="ruleForm.trigger4" label="By someone else"></el-checkbox>
+            </el-form-item>
             <el-form-item label="Publishing" prop="publishing">
                 <el-switch v-model="ruleForm.publishing" name="publishing"></el-switch>
             </el-form-item>
@@ -119,6 +135,10 @@ var axiosPost = axios.create({
           description: '',
           type: '',
           gender: '',
+          trigger1: false,
+          trigger2: false,
+          trigger3: false,
+          trigger4: false,
           publishing: '',
           num: 1,
           seriousness: null,
@@ -137,6 +157,18 @@ var axiosPost = axios.create({
             { required: true, message: 'Please select Type', trigger: 'change' }
           ],
           gender: [
+            { required: true, message: 'Please select Type', trigger: 'change' }
+          ],
+          trigger1: [
+            { required: true, message: 'Please select Type', trigger: 'change' }
+          ],
+          trigger2: [
+            { required: true, message: 'Please select Type', trigger: 'change' }
+          ],
+          trigger3: [
+            { required: true, message: 'Please select Type', trigger: 'change' }
+          ],
+          trigger4: [
             { required: true, message: 'Please select Type', trigger: 'change' }
           ],
           publishing: [
@@ -164,12 +196,17 @@ var axiosPost = axios.create({
       postte(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
+            console.log(this.ruleForm.triggers);
             const url = "http://localhost:8000/api/bucket-lists/new";
             axiosPost.post(url, {
                 title: this.ruleForm.title,
                 description: this.ruleForm.description,
                 type: this.ruleForm.type,
                 gender: this.ruleForm.gender,
+                trigger1: this.ruleForm.trigger1,
+                trigger2: this.ruleForm.trigger2,
+                trigger3: this.ruleForm.trigger3,
+                trigger4: this.ruleForm.trigger4,
                 publishing: this.ruleForm.publishing,
                 num: this.ruleForm.num,
                 seriousness: this.ruleForm.seriousness,

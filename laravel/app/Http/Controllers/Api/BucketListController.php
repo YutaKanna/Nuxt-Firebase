@@ -45,14 +45,31 @@ class BucketListController extends Controller
         $bucketList->publishing = $request->publishing;
         $bucketList->num = $request->num;
         $bucketList->seriousness = $request->seriousness;
-        // $bucketList->date = "2020-09-29";
         $date = substr($request->date, 0, 10);
         $bucketList->date = $date;
-        \Log::debug($request->startTime);
         $bucketList->start = $request->startTime;
         $bucketList->end = $request->endTime;
 
         $bucketList->save();
+
+        \Log::debug($request->triggers);
+
+        // tode: use foreach
+        if($request->trigger1) {
+            $bucketList->bucketListTriggers()->attach(1);
+        }
+
+        if($request->trigger2) {
+            $bucketList->bucketListTriggers()->attach(2);
+        }
+
+        if($request->trigger3) {
+            $bucketList->bucketListTriggers()->attach(3);
+        }
+
+        if($request->trigger4) {
+            $bucketList->bucketListTriggers()->attach(4);
+        }
 
         // foreach ($request->triggers as $triggerId) {
         //     $bucketList->bucketListTriggers()->attach($triggerId);
