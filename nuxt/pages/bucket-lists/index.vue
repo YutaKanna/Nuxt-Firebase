@@ -1,8 +1,8 @@
 <template>
   <div>
     <section class="container">
-        <ul v-for="(bucketList, key) in bucketLists">
-            <li>{{bucketList.title}} [{{key}}]</li>
+        <ul v-for="(type, key) in types">
+            <li>{{type.name}} [{{key}}]</li>
         </ul>
     </section>
   </div>
@@ -10,12 +10,25 @@
 
 <script>
 import axios from 'axios';
+import firebase from "~/plugins/firebase.js"
+import 'firebase/firestore'
 export default {
   layout: 'app',
-  async asyncData({ app }) {
-    const { data } = await app.$axios.get(`http://localhost:8000/api/bucket-lists`)
-    return { bucketLists: data.data.bucketLists }
-    console.log('bucketLists');
+  async asyncData({ params }) {
+    return {
+      types: await getAllDocs("types")
+    };
   }
+}
+
+async function getAllDocs(collection) {
+  let obj = [];
+  const db = firebase.firestore()
+  let colRef = db.collection(collection);
+  const allSnapShot = await colRef.get();
+  allSnapShot.forEach(doc => {
+      obj.push(doc.data());
+  });
+  return obj;
 }
 </script>
