@@ -36,7 +36,8 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    '@/plugins/element-ui'
+    '@/plugins/element-ui',
+    '~/plugins/firebase'
   ],
   /*
   ** Auto import components
@@ -56,16 +57,7 @@ export default {
     '@nuxtjs/proxy'
   ],
   axios: {
-    prefix: '/api',
-    proxy: true
-  },
-  proxy: {
-    '/api': {
-      target: 'http://localhost:8000/',
-      pathRewrite: {
-        '^/api': '/'
-      }
-    }
+    baseURL: 'https://laravel-nuxt-5824c.firebaseio.com'
   },
   /*
   ** Build configuration

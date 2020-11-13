@@ -12,6 +12,8 @@
     "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/proxy": "^2.0.1",
     "element-ui": "^2.13.2",
+    "firebase": "^8.0.1",
+    "node": "^10.23.0",
     "nuxt": "^2.14.0",
     "nuxt-buefy": "^0.3.31"
   },
