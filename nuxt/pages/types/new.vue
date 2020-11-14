@@ -19,7 +19,7 @@ export default {
     onSubmit() {
       console.log("hoge");
       var docData = {
-        name: "Hello world!"
+        name: this.name
       };
       var db = firebase.firestore()
       db.collection('types').add(docData)
