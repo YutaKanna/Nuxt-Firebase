@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="container">
-        <div>{{type.name}}</div>
+        <div>{{this.name}}</div>
     </section>
   </div>
 </template>
@@ -15,29 +15,25 @@ export default {
   async asyncData({params}) {
     const typeId = `${params.id}`;
     return {
-      type: await detail("types", typeId)
+      name: await detail("types", typeId)
     };
   }
 }
 
 async function detail(collection, id) {
-  let obj = [];
   const db = firebase.firestore()
-  db.collection(collection)
-  .doc(id)
-  .get()
-  .then(function(doc) {
+  var type = db.collection(collection).doc(id);
+
+  type.get().then(function(doc) {
     if (doc.exists) {
       console.log("Document data:", doc.data());
-      obj.push(doc.data());
+      console.log(doc.get('name'));
     } else {
-      console.log("No user");
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
     }
-  })
-  .catch(function(error) {
-    console.log("Error : ", error);
-  })
-  return obj;
+  }).catch(function(error) {
+    console.log("Error getting document:", error);
+  });
 }
-
 </script>
