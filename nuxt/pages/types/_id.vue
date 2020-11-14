@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="container">
-        <div>{{this.name}}</div>
+        <div>{{type.name}}</div>
     </section>
   </div>
 </template>
@@ -15,7 +15,7 @@ export default {
   async asyncData({params}) {
     const typeId = `${params.id}`;
     return {
-      name: await detail("types", typeId)
+      type: await detail("types", typeId)
     };
   }
 }
