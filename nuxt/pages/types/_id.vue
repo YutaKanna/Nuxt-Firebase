@@ -1,7 +1,10 @@
 <template>
   <div>
     <section class="container">
-        <div>{{type.name}}</div>
+        <form method="post" @submit.prevent="onSubmit">
+          <input type="text" name="name" v-model="type.name" />
+          <button type="submit">更新</button>
+        </form>
     </section>
   </div>
 </template>
@@ -12,11 +15,25 @@ import firebase from "~/plugins/firebase.js"
 import 'firebase/firestore'
 export default {
   layout: 'app',
+  data: function () {
+    return {
+      name: '',
+    }
+  },
   async asyncData({params}) {
     const typeId = `${params.id}`;
     return {
       type: await detail("types", typeId)
     };
+  },
+  methods: {
+    async onSubmit() {
+      const typeId = `${this.$route.params.id}`;
+      var db = firebase.firestore()
+      db.collection("types").doc(typeId).update({
+        name: this.type.name,
+      })
+    }
   }
 }
 
