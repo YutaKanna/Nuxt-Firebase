@@ -22,18 +22,11 @@ export default {
 
 async function detail(collection, id) {
   const db = firebase.firestore()
-  var type = db.collection(collection).doc(id);
-
-  type.get().then(function(doc) {
-    if (doc.exists) {
-      console.log("Document data:", doc.data());
-      console.log(doc.get('name'));
-    } else {
-      // doc.data() will be undefined in this case
-      console.log("No such document!");
-    }
-  }).catch(function(error) {
-    console.log("Error getting document:", error);
-  });
+  const type = await db
+    .collection(collection)
+    .doc(id)
+    .get()
+    .then(doc => doc.data());
+    return type
 }
 </script>
