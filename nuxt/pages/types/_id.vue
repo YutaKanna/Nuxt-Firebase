@@ -5,6 +5,9 @@
           <input type="text" name="name" v-model="type.name" />
           <button type="submit">更新</button>
         </form>
+        <form method="post" @submit.prevent="deletete">
+          <button type="submit">削除</button>
+        </form>
     </section>
   </div>
 </template>
@@ -33,6 +36,11 @@ export default {
       db.collection("types").doc(typeId).update({
         name: this.type.name,
       })
+    },
+    async deletete() {
+      const typeId = `${this.$route.params.id}`;
+      var db = firebase.firestore()
+      db.collection("types").doc(typeId).delete()
     }
   }
 }
