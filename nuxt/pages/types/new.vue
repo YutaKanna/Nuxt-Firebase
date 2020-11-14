@@ -1,7 +1,7 @@
 <template>
-  <form method="post">
+  <form method="post" @submit.prevent="onSubmit">
     <input type="text" name="name" v-model="name" />
-    <button type="submit" @click="onSubmit">submit</button>
+    <button type="submit">submit</button>
   </form>
 </template>
 
@@ -17,10 +17,13 @@ export default {
   },
   methods: {
     onSubmit() {
+      console.log("hoge");
+      var docData = {
+        name: "Hello world!"
+      };
       var db = firebase.firestore()
-      db.collection('types').doc('hoge').set({
-        name: this.name
-      })
+      db.collection('types').add(docData)
     }
   }
 }
+</script>
