@@ -27,3 +27,6 @@ Route::get('bucket-lists/{id}', 'Api\BucketListController@show');
 Route::post('bucket-lists/new', 'Api\BucketListController@store');
 Route::patch('bucket-lists/{id}', 'Api\BucketListController@update');
 Route::delete('bucket-lists/{id}', 'Api\BucketListController@destroy');
+
+// hoge
+Route::post('hoge/new', 'Api\HogeController@store');
