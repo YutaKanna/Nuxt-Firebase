@@ -8,14 +8,19 @@ use Illuminate\Http\Request;
 
 class HogeController extends Controller
 {
+    public function index()
+    {
+        return response()->json(['data' => [
+            'hoge' => Hoge::all()
+        ]]);
+    }
+
     public function store(Request $request)
     {
         \Log::debug($request);
-        $hoge = new Hoge;
-        $hoge->name = $request->name;
-        $hoge->image = $request->image;
 
-        $hoge->save();
+        $hoge = new Hoge;
+        $hoge->fill($request->all())->save();
     }
 
 }
