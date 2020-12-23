@@ -6,14 +6,16 @@ use App\Hoge;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class BucketListController extends Controller
+class HogeController extends Controller
 {
     public function store(Request $request)
     {
-        $bucketList = new BucketList;
-        $bucketList->image = $request->image;
+        \Log::debug($request);
+        $hoge = new Hoge;
+        $hoge->name = $request->name;
+        $hoge->image = $request->image;
 
-        $bucketList->save();
+        $hoge->save();
     }
 
 }

@@ -1,12 +1,13 @@
 <template>
     <div class="container">
-        <el-form ref="form" :model="form">
+        <el-form ref="form" :model="form" method="postte" action="http://localhost:8000/api/hoge/new" @submit.native.prevent="postte">
             <el-form-item>
                 <el-input v-model="form.name"></el-input>
             </el-form-item>
             <el-upload
                 action="#"
                 list-type="picture-card"
+                :on-change="handleAdd"
                 :auto-upload="false">
                     <i slot="default" class="el-icon-plus"></i>
                     <div slot="file" slot-scope="{file}">
@@ -24,13 +25,6 @@
                         <span
                         v-if="!form.disabled"
                         class="el-upload-list__item-delete"
-                        @click="handleDownload(file)"
-                        >
-                        <i class="el-icon-download"></i>
-                        </span>
-                        <span
-                        v-if="!form.disabled"
-                        class="el-upload-list__item-delete"
                         @click="handleRemove(file)"
                         >
                         <i class="el-icon-delete"></i>
@@ -38,8 +32,11 @@
                     </span>
                     </div>
             </el-upload>
+            <el-dialog :visible.sync="form.dialogVisible">
+                <img width="100%" :src="form.dialogImageUrl" alt="">
+            </el-dialog>
             <el-form-item>
-                <el-button type="primary" @click="onSubmit">Create</el-button>
+                <el-button type="primary" native-type="submit">Submit</el-button>
                 <el-button>Cancel</el-button>
             </el-form-item>
         </el-form>
@@ -82,6 +79,10 @@
 
 <script>
 import axios from 'axios';
+var axiosPost = axios.create({
+  xsrfHeaderName: "X-XSRF-TOKEN",
+  withCredentials: true
+})
 let url = '/api/hoge/new';
   export default {
     data: function() {
@@ -95,20 +96,25 @@ let url = '/api/hoge/new';
       }
     },
     methods: {
-      async onSubmit() {
-        console.log('submit!');
-      },
       handleRemove(file) {
         console.log(file);
       },
       handlePictureCardPreview(file) {
         console.log(file);
-        this.dialogImageUrl = file.url;
-        this.dialogVisible = true;
+        this.form.dialogImageUrl = file.url;
+        this.form.dialogVisible = true;
       },
-      handleDownload(file) {
-        console.log(file);
-      }
+      handleAdd: function (file, dialogImageUrl) {
+        this.form.dialogImageUrl = dialogImageUrl
+      },
+      async postte() {
+        const url = "http://localhost:8000/api/hoge/new";
+        console.log(this.form.dialogImageUrl);
+        await axiosPost.post(url, {
+          name: this.form.name,
+          withCredentials: true,
+        }).then(this.$router.push('/hoge'));
+      },
     }
   }
 </script>

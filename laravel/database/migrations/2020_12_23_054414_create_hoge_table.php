@@ -15,6 +15,7 @@ class CreateHogeTable extends Migration
     {
         Schema::create('hoge', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name')->nullable();
             $table->string('image', 100)->nullable();
             $table->timestamps();
         });
