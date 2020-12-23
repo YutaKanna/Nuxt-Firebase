@@ -1,7 +1,10 @@
 <template>
   <div>
     <section class="container">
-        <p>something</p>
+        <ul v-for="(hoge, key) in hoge">
+            <li>{{hoge.name}} [{{key}}]</li>
+            <img src="@/assets/images/hoge.png">
+        </ul>
     </section>
   </div>
 </template>
@@ -11,9 +14,8 @@ import axios from 'axios';
 export default {
   layout: 'app',
   async asyncData({ app }) {
-    const { data } = await app.$axios.get(`http://localhost:8000/api/bucket-lists`)
-    return { bucketLists: data.data.bucketLists }
-    console.log('bucketLists');
+    const { data } = await app.$axios.get(`http://localhost:8000/api/hoge`)
+    return { hoge: data.data.hoge }
   }
 }
 </script>

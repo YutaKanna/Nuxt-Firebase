@@ -112,6 +112,7 @@ let url = '/api/hoge/new';
         console.log(this.form.dialogImageUrl);
         await axiosPost.post(url, {
           name: this.form.name,
+          image: this.form.dialogImageUrl[0].raw,
           withCredentials: true,
         }).then(this.$router.push('/hoge'));
       },
