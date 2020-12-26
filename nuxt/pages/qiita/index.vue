@@ -14,10 +14,7 @@ import axios from 'axios';
 export default {
   async asyncData({ app }) {
     const items = await app.$axios.$get('https://qiita.com/api/v2/authenticated_user/items', {
-        headers: {'Content-Type': 'application/json', 'Authorization': process.env.QIITA_TOKEN},
-        params: {
-            page: 1
-        }
+        headers: {'Content-Type': 'application/json', 'Authorization': process.env.QIITA_TOKEN}
     });
     return {
       items
