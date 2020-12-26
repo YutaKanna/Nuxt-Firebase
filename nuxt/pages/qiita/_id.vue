@@ -7,6 +7,9 @@
           <input type="text" name="tag" v-model="item.tags[0]['name']" />
           <button type="submit">更新</button>
         </form>
+        <form method="post" @submit.prevent="deletete">
+          <button type="submit">削除</button>
+        </form>
     </section>
   </div>
 </template>
@@ -35,7 +38,6 @@ export default {
   },
   methods: {
     async updatete() {
-      console.log('hoge');
       const response = await this.$axios.$patch
       (`https://qiita.com/api/v2/items/${this.$route.params.id}`, {
         body: this.item.body,
@@ -53,6 +55,15 @@ export default {
           }
       }).then(this.$router.push('/qiita'));
     },
+    async deletete() {
+      const response = await this.$axios.$delete
+      (`https://qiita.com/api/v2/items/${this.$route.params.id}`, {
+        headers:
+          {
+            'Authorization': process.env.QIITA_TOKEN
+          }
+      }).then(this.$router.push('/qiita'));
+    }
   }
 }
 </script>
