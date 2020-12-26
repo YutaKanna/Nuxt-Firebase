@@ -3,7 +3,9 @@
     <section class="container">
         <div>自分が投稿した記事の一覧</div>
         <ul v-for="(item, key) in items">
+          <nuxt-link :to="{name: 'qiita-id', params: {id: item.id}}">
             <li>{{item.title}}</li>
+          </nuxt-link>
         </ul>
     </section>
   </div>
