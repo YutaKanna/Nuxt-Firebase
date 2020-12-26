@@ -73,5 +73,8 @@ export default {
   */
   build: {
     transpile: [/^element-ui/],
+  },
+  env: {
+    QIITA_TOKEN: process.env.QIITA_TOKEN
   }
 }
