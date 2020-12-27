@@ -2,7 +2,8 @@
   <div>
     <section class="container">
         <div>Firebase Cloud Messaging</div>
-        <font-awesome-icon :icon="['fas', 'edit']"/>
+        <button type="submit">通知する</button>
+        <font-awesome-icon :icon="['fas', 'bell']"/>
     </section>
   </div>
 </template>
