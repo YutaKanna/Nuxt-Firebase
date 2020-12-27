@@ -9,13 +9,19 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@nuxtjs/axios": "^5.12.2",
-    "@nuxtjs/proxy": "^2.0.1",
-    "element-ui": "^2.13.2",
-    "nuxt": "^2.14.0",
+    "@nuxtjs/axios": "^5.12.4",
+    "@nuxtjs/proxy": "^2.1.0",
+    "element-ui": "^2.14.1",
+    "nuxt": "^2.14.12",
     "nuxt-buefy": "^0.3.31"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "^3.4.2",
+    "@tailwindcss/postcss7-compat": "^2.0.2",
+    "autoprefixer": "^9.8.6",
+    "postcss": "^7.0.35",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2"
+  },
   "jest": {
     "testEnvironment": "node",
     "moduleFileExtensions": [

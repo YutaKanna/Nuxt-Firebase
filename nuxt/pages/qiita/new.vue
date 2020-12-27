@@ -35,7 +35,7 @@ import axios from 'axios';
         {
           headers:
             {
-                'Authorization': process.env.QIITA_TOKEN
+                'Authorization': 'Bearer ' + process.env.QIITA_TOKEN
             }
         }).then(this.$router.push('/qiita'));
       }
