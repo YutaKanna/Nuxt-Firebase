@@ -31,11 +31,11 @@ export default {
     methods: {
       submit() {
         firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-        .then(this.$router.push('/'));
+        .then(this.$router.push('/login-user'));
       },
       googleLogin: function() {
         firebase.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider())
-        .then(this.$router.push('/bucket-lists'));
+        .then(this.$router.push('/login-user'));
       }
     }
 }

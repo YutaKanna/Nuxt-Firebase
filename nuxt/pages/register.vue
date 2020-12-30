@@ -27,7 +27,7 @@ export default {
     methods: {
       submit() {
         firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
-        .then(this.$router.push('/'));
+        .then(this.$router.push('/login-user'));
       }
     }
 }
