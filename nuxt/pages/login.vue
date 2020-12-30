@@ -10,6 +10,9 @@
        @click="submit"
       >submit</button>
     </form>
+    <div class="links">
+      <button @click="googleLogin">googleでログイン</button>
+    </div>
   </div>
 </template>
 
@@ -29,6 +32,10 @@ export default {
       submit() {
         firebase.auth().signInWithEmailAndPassword(this.email, this.password)
         .then(this.$router.push('/'));
+      },
+      googleLogin: function() {
+        firebase.auth().signInWithRedirect(new firebase.auth.GoogleAuthProvider())
+        .then(this.$router.push('/bucket-lists'));
       }
     }
 }
