@@ -30,7 +30,7 @@ export default {
   },
   async asyncData({params}) {
     const { data } = await axios.get(`https://qiita.com/api/v2/items/${params.id}`, {
-        headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + process.env.QIITA_TOKEN}
+        headers: {'Content-Type': 'application/json', 'Authorization': process.env.QIITA_TOKEN}
     });
     return {
       item: data
@@ -51,7 +51,7 @@ export default {
       {
         headers:
           {
-            'Authorization': 'Bearer ' + process.env.QIITA_TOKEN
+            'Authorization': process.env.QIITA_TOKEN
           }
       }).then(this.$router.push('/qiita'));
     },
@@ -60,7 +60,7 @@ export default {
       (`https://qiita.com/api/v2/items/${this.$route.params.id}`, {
         headers:
           {
-            'Authorization': 'Bearer ' + process.env.QIITA_TOKEN
+            'Authorization': process.env.QIITA_TOKEN
           }
       }).then(this.$router.push('/qiita'));
     }
